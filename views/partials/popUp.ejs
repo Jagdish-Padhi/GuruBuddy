@@ -1,0 +1,24 @@
+<% if (scsMsg) { %>
+
+    <div class="box" style="background-color: #d4edda; color: #155724; padding: 10px;">
+        ✅ <%= scsMsg %>
+    </div>
+    <% } %>
+
+        <% if (errMsg) { %>
+            <div class="box"
+                style="background-color: #f8d7da; color: #721c24; padding: 10px; border: 1px solid #f5c6cb; border-radius: 5px;">
+                ❌ <%= errMsg %>
+            </div>
+            <% } %>
+
+
+
+                <script>
+                    setTimeout(() => {
+                        const messageBox = document.querySelector(".box");
+                        messageBox.classList.add("fade-out");
+
+                        messageBox.remove();
+                    }, 3000);
+                </script>

@@ -1,0 +1,56 @@
+<h2 class="text-3xl font-bold text-center mb-6 mt-6 text-blue-900">Submit the last topic till where you have taught ?
+</h2>
+<form action="/lastTopic" method="POST" class="mt-10 mb-10 bg-indigo-100 p-6 rounded-lg shadow space-y-4">
+
+    <div class="flex flex-col w-full">
+        <label class="text-sm text-gray-700 mb-1">Select Subject</label>
+        <input type="time" name="from" class="p-2 rounded border border-blue-300" required>
+    </div> <br>
+    <div class="flex flex-col w-full">
+        <label class="text-sm text-gray-700 mb-1">Last Explained Topic</label>
+        <input type="text" name="to" class="p-2 rounded border border-blue-300" required>
+    </div>
+
+
+    <div class="text-center">
+        <button class="bg-indigo-700 hover:bg-indigo-900 text-white px-6 py-2 rounded shadow ">
+            Submit
+        </button>
+    </div>
+
+</form>
+
+
+<!-- Feature Cards Section -->
+<section class="px-6 md:px-10 pb-16">
+    <h2 class="text-2xl font-semibold text-center mb-10 text-gray-600">Powerful Features for You</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in-up">
+        <!-- Card 1 -->
+        <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
+            <h3 class="text-xl font-bold text-blue-900 mb-2">Set Schedule</h3>
+            <p class="text-gray-600">Set your weekly schedule once and leave rest remainder works on GuruBuddy!</p>
+        </div>
+        <!-- Card 2 -->
+        <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
+            <h3 class="text-xl font-bold text-blue-900 mb-2">AI powered GuruBuddy Support</h3>
+            <p class="text-gray-600">Facing problem to resolve any doubt or busy? then just type your doubt and get
+                detailed
+                explanations.</p>
+        </div>
+        <!-- Card 3 -->
+        <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
+            <h3 class="text-xl font-bold text-blue-900 mb-2">Smart Remainder</h3>
+            <p class="text-gray-600">GuruBuddy will remind you where you left the topic last time and from where to
+                continue
+                in lecture which will free you from jumbling all classes ongoing topics.</p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
+            <h3 class="text-xl font-bold text-blue-900 mb-2">AI powered GuruBuddy Support</h3>
+            <p class="text-gray-600">Facing problem to resolve any doubt or busy? then just type your doubt and get
+                detailed
+                explanations.</p>
+        </div>
+    </div>
+</section>

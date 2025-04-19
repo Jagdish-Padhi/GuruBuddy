@@ -1,0 +1,65 @@
+<nav class="bg-gray-900 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+    
+      <div class="text-xl font-bold ">GuruBuddy</div>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex gap-6 items-center">
+        <a href="/home" class="hover:text-indigo-300">Home</a>
+
+        <a href="/sched" class="hover:text-indigo-300">Set Schedule</a>
+        <a href="/chat" class="hover:text-indigo-300">Smart helper</a>
+        <a href="/voice" class="hover:text-indigo-300">Talk with AI</a>
+        <a href="/doubt" class="hover:text-indigo-300">Doubt solver</a>
+        <a href=""></a><button class="bg-indigo-600 px-4 py-2 rounded hover:bg-indigo-500">logout</button>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button id="mobile-menu-button" class="text-white focus:outline-none p-2" aria-label="Toggle menu">
+          <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 bg-gray-900 text-center flex-col">
+
+    <div class="my-3">
+      <a href="/home" class="hover:text-indigo-300">Home</a>
+
+    </div>
+
+    <div class="my-3">
+      <a href="/sched" class="hover:text-indigo-300">Set Schedule</a>
+
+    </div>
+
+    <div class="my-3">
+      <a href="/chat" class="hover:text-indigo-300">Smart helper</a><br>
+
+    </div>
+
+    <div class="my-3">
+      <a href="/voice" class="hover:text-indigo-300">Talk with AI</a><br>
+
+    </div>
+
+    <div class="my-3">
+      <a href="/doubt" class="hover:text-indigo-300">Doubt solver</a><br>
+
+    </div>
+
+    <div class="my-3">
+
+      <a href="/logout"><button
+          class="w-fit text-left bg-indigo-600 px-4 py-2 rounded hover:bg-indigo-400 my-3">logout</button></a>
+
+    </div>
+
+  </div>
+</nav>
