@@ -1,7 +1,5 @@
-import { title } from "process";
 import Teacher from "../models/Teacher.js";
-import jwt from "jsonwebtoken";
-
+ 
 const sendToken = (res, teacher) => {
   const token = teacher.generateJWT();
   res.cookie("token", token, {

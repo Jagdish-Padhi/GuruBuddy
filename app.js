@@ -8,6 +8,7 @@ import authRoutes from "./routes/authRoutes.js";
 import staticRoutes from "./routes/staticRoutes.js";
 import schedRoutes from "./routes/schedRoute.js";
 import aiRoutes from "./routes/aiRoutes.js";
+import lastTopicRoutes from "./routes/lastTopicRoutes.js";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -55,6 +56,7 @@ app.use("/", authRoutes);
 app.use("/", staticRoutes);
 app.use("/", schedRoutes);
 app.use("/", aiRoutes);
+app.use("/", lastTopicRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

@@ -7,6 +7,4 @@ router.get("/home", isAuthenticated, async (req, res) => {
   return res.render("home", { title: "Home", scsMsg: null, errMsg: null });
 });
 
- 
-
 export default router;
