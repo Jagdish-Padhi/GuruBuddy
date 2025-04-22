@@ -6,16 +6,15 @@ const router = express.Router();
 
 router.get("/sched", (req, res) => {
   const { scsMsg = null, errMsg = null } = req.query;
-  renderSched(req, res, scsMsg, errMsg);  
+  renderSched(req, res, scsMsg, errMsg);
 });
-
 
 router.post("/sched", async (req, res) => {
   const { day, subject, division, from, to } = req.body;
 
   if (!day || !subject || !division || !from || !to) {
     const msg = encodeURIComponent("Please enter all details!");
-    res.redirect("/sched?errMsg=" + msg);  
+    res.redirect("/sched?errMsg=" + msg);
   }
 
   try {
@@ -23,14 +22,15 @@ router.post("/sched", async (req, res) => {
     await schedule.save();
 
     const msg = encodeURIComponent("Schedule saved successfully!");
-    res.redirect("/sched?scsMsg=" + msg);  
+    res.redirect("/sched?scsMsg=" + msg);
   } catch (err) {
     console.error(err);
-    const msg = encodeURIComponent("Something went wrong! Please try again later.");
-    res.redirect("/sched?errMsg=" + msg);  
+    const msg = encodeURIComponent(
+      "Something went wrong! Please try again later."
+    );
+    res.redirect("/sched?errMsg=" + msg);
   }
 });
-
 
 router.delete("/sched/:id", async (req, res) => {
   const { id } = req.params;
@@ -41,10 +41,11 @@ router.delete("/sched/:id", async (req, res) => {
     res.redirect("/sched?scsMsg=" + msg);
   } catch (err) {
     console.error("Error deleting schedule:", err);
-    const msg = encodeURIComponent("Something went wrong! Please try again later.");
+    const msg = encodeURIComponent(
+      "Something went wrong! Please try again later."
+    );
     res.redirect("/sched?errMsg=" + msg);
   }
 });
-
 
 export default router;

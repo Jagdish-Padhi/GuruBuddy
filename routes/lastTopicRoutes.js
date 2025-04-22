@@ -6,7 +6,6 @@ import {
   getReminder,
   checkAfterLec,
 } from "../controllers/schedController.js";
-import schedule from "../models/schedule.js";
 
 const router = express.Router();
 
