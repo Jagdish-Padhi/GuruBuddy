@@ -77,9 +77,11 @@ export const renderLastTopic = async (
       subDivMap[sub] = [...subDivMap[sub]];
     }
 
-    const successMessage = typeof req.query.scsMsg === "String" ? req.query.scsMsg: "";
-    const errorMessage = typeof req.query.errMsg === "string" ? req.query.errMsg : "";
-    
+    const successMessage =
+      typeof req.query.scsMsg === "String" ? req.query.scsMsg : "";
+    const errorMessage =
+      typeof req.query.errMsg === "string" ? req.query.errMsg : "";
+
     return res.render("lastTopic", {
       subjects,
       subDivMap,
@@ -116,7 +118,7 @@ export const getReminder = async (req, res) => {
   if (schedule) {
     const lastTopic = await LastTopic.findOne({ scheduleId: schedule._id });
 
-    const msg = `You have ${schedule.subject} lecture. Last time you taught till ${lastTopic?.topic || "Not filled the form"}`;
+    const msg = `You have ${schedule.subject} lecture. Last time you taught till ${lastTopic?.topic || "_____Not filled the form"}`;
 
     return res.json({ showRemainder: true, message: msg });
   }
@@ -136,7 +138,6 @@ export const checkAfterLec = async (req, res) => {
   console.log("🕒 Now (IST):", now.toString());
 
   const currentDay = now.toLocaleString("en-US", { weekday: "long" });
-  const currentTime = now.toTimeString().slice(0, 5);
 
   const schedules = await Schedule.find({ day: currentDay });
 
@@ -157,6 +158,7 @@ export const checkAfterLec = async (req, res) => {
         return res.json({
           showPopup: true,
           subject: s.subject,
+          scheduleId: s._id,
         });
       }
     }

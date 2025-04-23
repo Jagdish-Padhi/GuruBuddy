@@ -9,6 +9,7 @@ import staticRoutes from "./routes/staticRoutes.js";
 import schedRoutes from "./routes/schedRoute.js";
 import aiRoutes from "./routes/aiRoutes.js";
 import lastTopicRoutes from "./routes/lastTopicRoutes.js";
+import voiceRoutes from "./routes/voiceRoutes.js"
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -46,6 +47,7 @@ mongoose
 
 // Middleware
 app.use(cors());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
@@ -57,6 +59,7 @@ app.use("/", staticRoutes);
 app.use("/", schedRoutes);
 app.use("/", aiRoutes);
 app.use("/", lastTopicRoutes);
+app.use("/", voiceRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
