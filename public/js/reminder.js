@@ -38,7 +38,7 @@ async function startVoiceLoop(text) {
 
   interval = setInterval(async () => {
     try {
-      await fetch("/playvoice", {
+      const res = await fetch("/playvoice", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: texts[i % 2] }),

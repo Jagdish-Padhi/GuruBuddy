@@ -48,4 +48,30 @@ router.delete("/sched/:id", async (req, res) => {
   }
 });
 
+//for reset button working
+
+router.delete("/sched", async (req, res) => {
+  try {
+
+    const schedule = await Schedule.findOne({});
+
+    if(!schedule){
+
+      const msg = encodeURIComponent("Already schedule is empty!");
+      res.redirect("/sched?errMsg=" + msg);
+    }
+
+    await Schedule.deleteMany({});
+    const msg = encodeURIComponent("All schedules deleted successfully!");
+    res.redirect("/sched?scsMsg=" + msg);
+  } catch (err) {
+    console.error("Error deleting all schedules:", err);
+    const msg = encodeURIComponent(
+      "Something went wrong! Please try again later."
+    );
+    res.redirect("/sched?errMsg=" + msg);
+  }
+});
+
+
 export default router;

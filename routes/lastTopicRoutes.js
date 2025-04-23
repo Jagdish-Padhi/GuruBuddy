@@ -2,56 +2,40 @@ import express from "express";
 import Schedule from "../models/schedule.js";
 import LastTopic from "../models/lastTopic.js";
 import {
-  renderSched,
   getReminder,
   checkAfterLec,
+  renderLastTopic,
 } from "../controllers/schedController.js";
 
 const router = express.Router();
 
-//Rendering the form page
-router.get("/lastTopic", async (req, res) => {
-  const schedules = await Schedule.find({});
-
-  //combined array of subject and topic
-  const data = await Promise.all(
-    schedules.map(async (schedule) => {
-      const lastTopic = await LastTopic.findOne({ scheduleId: schedule._id });
-      return {
-        subject: schedule.subject,
-        topic: lastTopic ? lastTopic.topic : "Not filled form yet",
-      };
-    })
-  );
-
-  const subjects = [...new Set(schedules.map((s) => s.subject))];
-
-  res.render("lastTopic", { subjects, title: "Last Topic Form", data });
-});
+//Rendering the last topic form page
+router.get("/lastTopic", renderLastTopic);
 
 //submission of form
 router.post("/lastTopic", async (req, res) => {
   try {
-    const { subject, topic } = req.body;
+    const { scheduleId, topic } = req.body;
 
-    const schedule = await Schedule.findOne({ subject });
+    console.log("submitted data", req.body);
 
-    if (schedule) {
+    const schedule = await Schedule.findOne({ _id: scheduleId });
+
+    console.log("Matching schedule:", schedule);
+
+    if (scheduleId) {
       await LastTopic.findOneAndUpdate(
-        { scheduleId: schedule._id },
-        { topic: topic },
-        { upsert: true }
+        { scheduleId },
+        { topic },
+        { upsert: true, new: true }
       );
     }
-    renderSched(req, res, "Form submitted successfully!");
+    const msg = encodeURIComponent("Form submitted successfully!");
+    res.redirect("/lastTopic?scsMsg=" + msg);
   } catch (error) {
     console.log(error);
-    renderSched(
-      req,
-      res,
-      null,
-      "Something went wrong! Please try again later."
-    );
+    const msg = encodeURIComponent("Submission failed, try again later!");
+    res.redirect("/lastTopic?errMsg=" + msg);
   }
 });
 
@@ -59,7 +43,6 @@ router.post("/lastTopic", async (req, res) => {
 router.get("/getReminder", getReminder);
 
 //after lecture popUp to fill the form
-
 router.get("/checkAfterLec", checkAfterLec);
 
 export default router;

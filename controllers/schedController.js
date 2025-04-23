@@ -39,6 +39,62 @@ export const renderSched = async (req, res, scsMsg = null, errMsg = null) => {
   }
 };
 
+//Render lastTopic page
+export const renderLastTopic = async (
+  req,
+  res,
+  scsMsg = null,
+  errMsg = null
+) => {
+  try {
+    const schedules = await Schedule.find({});
+
+    const data = await Promise.all(
+      schedules.map(async (schedule) => {
+        const lastTopic = await LastTopic.findOne({ scheduleId: schedule._id });
+
+        return {
+          subject: schedule.subject,
+          topic: lastTopic ? lastTopic.topic : "Not filled the form yet",
+          division: schedule.division,
+          scheduleId: schedule._id.toString(),
+        };
+      })
+    );
+
+    // unique subjects list
+    const subjects = [...new Set(schedules.map((s) => s.subject))];
+
+    //mapping subjects to division
+    const subDivMap = {};
+    schedules.forEach((s) => {
+      if (!subDivMap[s.subject]) subDivMap[s.subject] = new Set();
+      subDivMap[s.subject].add(s.division);
+    });
+
+    //converted sets into arrays for rendering in ejs
+    for (let sub in subDivMap) {
+      subDivMap[sub] = [...subDivMap[sub]];
+    }
+
+    const successMessage = typeof req.query.scsMsg === "String" ? req.query.scsMsg: "";
+    const errorMessage = typeof req.query.errMsg === "string" ? req.query.errMsg : "";
+    
+    return res.render("lastTopic", {
+      subjects,
+      subDivMap,
+      data,
+      title: "Last topic form",
+      scheduleData: data,
+      scsMsg: successMessage,
+      errMsg: errorMessage,
+    });
+  } catch (error) {
+    console.error("Error rendering lastTopic:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
 //For lecture remainder data sending to frontend
 
 export const getReminder = async (req, res) => {

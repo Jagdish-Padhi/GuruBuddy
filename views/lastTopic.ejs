@@ -1,57 +1,137 @@
+
+<%- include("partials/popUp") %>
+
 <h2 class="text-3xl font-bold text-center mb-6 mt-6 text-blue-900">Submit the last topic till where you have taught ?
 </h2>
-<form action="/lastTopic" method="POST" class="mt-10 mb-10 bg-indigo-100 p-6 rounded-lg shadow space-y-4">
 
+<form action="/lastTopic" method="POST" class="mt-10 mb-10 bg-indigo-100 p-6 rounded-lg shadow space-y-4">
     <div class="flex flex-col w-full">
         <label class="text-sm text-gray-700 mb-1">Select Subject</label>
-        <select name="subject" class="p-2 rounded border border-blue-300" required>
-
-            <% subjects.forEach(sub=> { %>
-
-                <option value=`<%=sub %>`> <%= sub %>
+        <select name="subject" id="subjectDropdown" class="p-2 rounded border border-blue-300" required>
+            <option disabled selected>Select a subject</option>
+            <% subjects.forEach(subject=> { %>
+                <option value="<%= subject %>">
+                    <%= subject %>
                 </option>
                 <% }) %>
-
         </select>
-    </div> <br>
+    </div>
+
+    <div class="flex flex-col w-full">
+        <label class="text-sm text-gray-700 mb-1">Division</label>
+        <select name="division" id="divisionDropdown" class="p-2 rounded border border-blue-300" required>
+            <option disabled selected>Select division</option>
+            <!-- Divisions will be populated based on selected subject -->
+        </select>
+    </div>
+
+    <div class="flex flex-col w-full">
+        <input type="hidden" id="scheduleIdInput" name="scheduleId">
+    </div>
+
+
     <div class="flex flex-col w-full">
         <label class="text-sm text-gray-700 mb-1">Last Explained Topic</label>
         <input type="text" name="topic" class="p-2 rounded border border-blue-300" required>
     </div>
 
-
     <div class="text-center">
-        <button class="bg-indigo-700 hover:bg-indigo-900 text-white px-6 py-2 rounded shadow ">
+        <button type="submit" class="bg-indigo-700 hover:bg-indigo-900 text-white px-6 py-2 rounded shadow ">
             Submit
         </button>
     </div>
 
+    <script>
+        const subDivMap = JSON.parse(`<%- JSON.stringify(subDivMap) %>`);
+        const scheduleData = JSON.parse(`<%- JSON.stringify(data) %>`);
+        const scheduleIdInput = document.getElementById('scheduleIdInput');
+    
+        const subjectDropdown = document.getElementById('subjectDropdown');
+        const divisionDropdown = document.getElementById('divisionDropdown');
+    
+        subjectDropdown.addEventListener('change', () => {
+            const selectedSubject = subjectDropdown.value;
+            const divisions = subDivMap[selectedSubject] || [];
+    
+            divisionDropdown.innerHTML = '<option disabled selected>Select division</option>';
+    
+            divisions.forEach(division => {
+                const option = document.createElement('option');
+                option.value = division;
+                option.textContent = division;
+                divisionDropdown.appendChild(option);
+            });
+        });
+    
+        divisionDropdown.addEventListener("change", () => {
+            const selectedSubject = subjectDropdown.value;
+            const selectedDivison = divisionDropdown.value;
+    
+            const match = scheduleData.find(item =>
+                item.subject === selectedSubject && item.division === selectedDivison
+            );
+    
+            if (match) {
+                scheduleIdInput.value = match.scheduleId;
+            }
+        });
+    </script>
+    
 </form>
 
 
-<!-- Feature Cards Section -->
+<!-- Table for lastly taught topics  -->
+
+
 <section class="px-6 md:px-10 pb-16">
     <h2 class="text-2xl font-semibold text-center mb-10 text-indigo-900">Last taught topics list subject wise</h2>
+
+
     <div class="flex justify-center items-center animate-fade-in-up"></div>
-        <!-- Card 1 -->
-        <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
-            <table class="table-auto w-full border-collapse border border-gray-300">
-                <thead>
-                    <tr>
-                        <th class="border border-gray-300 px-4 py-2 text-left">Subject</th>
-                        <th class="border border-gray-300 px-4 py-2 text-left">Last Taught Topic</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% data.forEach(item => { %>
-                        <tr>
-                            <td class="border border-gray-300 px-4 py-2"><%= item.subject %></td>
-                            <td class="border border-gray-300 px-4 py-2"><%= item.topic %></td>
-                        </tr>
-                    <% }) %>
-                </tbody>
-            </table>
+
+    <% if (data.length==0) { %>
+
+        <div class="text-center mt-10">
+            <p class="text-gray-600">No data available<br>Please set schedules first by <a href="/sched"
+                    class="underline hover:text-indigo-500">clicking here</a></p>
+
         </div>
-        
-    </div>
-</section>    </div>
+
+        <% } %>
+
+            <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
+                <table class="table-auto w-full border-collapse border border-gray-600">
+                    <thead>
+                        <tr>
+                            <th class="border border-gray-300 px-4 py-2 text-left">Sr. no.</th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">Division</th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">Subject</th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">Last Taught Topic</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% data.forEach(item=> { %>
+
+
+                            <tr>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <%= data.indexOf(item) + 1 %>
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <%= item.division %>
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <%= item.subject %>
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <%= item.topic %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+
+            </div>
+</section>
+</div>
