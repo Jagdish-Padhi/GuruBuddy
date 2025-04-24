@@ -9,7 +9,6 @@ import staticRoutes from "./routes/staticRoutes.js";
 import schedRoutes from "./routes/schedRoute.js";
 import aiRoutes from "./routes/aiRoutes.js";
 import lastTopicRoutes from "./routes/lastTopicRoutes.js";
-import voiceRoutes from "./routes/voiceRoutes.js"
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -37,9 +36,9 @@ app.use(session({
 
 // MongoDB connection
 mongoose
-  .connect("mongodb://127.0.0.1:27017/teacher")
+  .connect(process.env.MONGO_URI)
   .then(() => {
-    console.log("MongoDB connected successfully");
+    console.log("MongoDB Atlas connected successfully");
   })
   .catch((err) => {
     console.error("MongoDB connection error:", err);
@@ -59,7 +58,6 @@ app.use("/", staticRoutes);
 app.use("/", schedRoutes);
 app.use("/", aiRoutes);
 app.use("/", lastTopicRoutes);
-app.use("/", voiceRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

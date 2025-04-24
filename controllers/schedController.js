@@ -116,18 +116,35 @@ export const getReminder = async (req, res) => {
   });
 
   if (schedule) {
+    await LastTopic.findOneAndUpdate(
+      { scheduleId: schedule._id },
+      { submitted: false },
+      { upsert: true, new: true }
+    );
+
     const lastTopic = await LastTopic.findOne({ scheduleId: schedule._id });
 
-    const msg = `You have ${schedule.subject} lecture. Last time you taught till ${lastTopic?.topic || "_____Not filled the form"}`;
+    const topicText =
+      lastTopic?.topic ?
+        `Last time, you had taught till "${lastTopic.topic}".`
+      : `Last time you had not filled the form after lecture. Please remember to fill it this time `;
 
-    return res.json({ showRemainder: true, message: msg });
+    const eng = `You have a ${schedule.subject} lecture now. ${topicText}`;
+
+    const hindiTopicText =
+      lastTopic?.topic ?
+        `पिछली बार आपने "${lastTopic.topic}" तक पढ़ाया था।`
+      : `पिछली बार आपने क्लास के बाद फॉर्म नहीं भरा था।  इस बार ज़रूर भर दीजिए, याद दिला रहे हैं `;
+
+    const hindi = `अभी आपकी ${schedule.subject} की क्लास है। ${hindiTopicText}`;
+
+    return res.json({ showRemainder: true, engMsg: eng, hindiMsg: hindi });
   }
 
   res.json({ showRemainder: false });
 };
 
 //After 5 min of lecture
-
 export const checkAfterLec = async (req, res) => {
   console.log("🔍 API Hit: sched/checkAfterLec");
 
@@ -153,7 +170,7 @@ export const checkAfterLec = async (req, res) => {
     if (now >= lectureEnd) {
       const topic = await LastTopic.findOne({ scheduleId: s._id });
 
-      if (!topic) {
+      if (!topic || topic.submitted === false) {
         console.log("🚨 No LastTopic found for:", s.subject);
         return res.json({
           showPopup: true,

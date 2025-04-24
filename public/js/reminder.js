@@ -1,21 +1,21 @@
-console.log("📢 Script loaded successfully");
-
-// startVoiceLoop("Yes I am Speaking!")
 
 async function checkLecTime() {
   const res = await fetch("/getReminder");
   const data = await res.json();
 
   if (data.showRemainder) {
-    showReminderPopUp(data.message);
-    startVoiceLoop(data.message);
+    showReminderPopUp(data.engMsg);
+    startVoiceLoop(data.engMsg, data.hindiMsg);
   }
 }
 
 //to show popup
-
 function showReminderPopUp(message) {
+  if (document.querySelector("#reminder-popup")) return;
+
   const popUp = document.createElement("div");
+
+  popUp.id = "reminder-poppu";
 
   popUp.innerHTML = `
     <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-60 z-50">
@@ -29,57 +29,32 @@ function showReminderPopUp(message) {
   document.body.appendChild(popUp);
 }
 
-//to start voice
-
+//to start/stop voice
 let interval;
-
-async function startVoiceLoop(text) {
-
-  const texts = [text, "कृपया ध्यान दें: " + text];
-  let i = 0;
-
+function startVoiceLoop(englishText, hindiText) {
   interval = setInterval(() => {
-    speak(texts[i % 2]);
-    i++;
-  }, 3000);
+    // English
+    const eng = new SpeechSynthesisUtterance(englishText);
+    eng.lang = "en-IN";  
+    speechSynthesis.speak(eng);
+
+    // Hindi
+    eng.onend = () => {
+      const hindi = new SpeechSynthesisUtterance(hindiText);
+      hindi.lang = "hi-IN";  
+      speechSynthesis.speak(hindi);
+    };
+  }, 9000); 
 }
-
-//speak browser
-function speak(text) {
-  const utterance = new SpeechSynthesisUtterance(text);
-
-  const voices = window.speechSynthesis.getVoices();
-
-  // Try to pick an attractive-sounding female voice
-  const preferredVoices = voices.filter(voice =>
-    voice.name.includes("Google") &&
-    (voice.name.toLowerCase().includes("female") ||
-     voice.name.toLowerCase().includes("woman") ||
-     voice.name.toLowerCase().includes("english")) &&
-    voice.lang.startsWith("en")
-  );
-
-  // Fallback to first Google voice if specific match not found
-  utterance.voice = preferredVoices[0] || voices.find(v => v.name.includes("Google")) || null;
-
-  // Voice tone adjustments
-  utterance.pitch = 1.2;  // higher = more expressive
-  utterance.rate = 0.95;  // slight slow for clarity
-  utterance.volume = 1;   // full volume
-
-  window.speechSynthesis.speak(utterance);
-}
-
-
-
-//stop voice loop
 
 function stopVoiceLoop() {
   clearInterval(interval);
-  document.querySelector(".z-50").remove();
+  speechSynthesis.cancel(); // Stop any current speech
+  const popup = document.querySelector(".z-50");
+  if (popup) popup.remove();
 }
 
-// FOR 5 MINUTES OF AFTER LECTURE
+// FOR 5 MINUTES AFTER LECTURE
 async function checkAfterLec() {
   const res = await fetch("/checkAfterLec");
   const data = await res.json();
@@ -88,13 +63,17 @@ async function checkAfterLec() {
     showTopicFormPopup(data.subject, data.scheduleId);
 
     startVoiceLoop(
-      "Please update the last topic you taught. / कृपया आपने जो टॉपिक पढ़ाया है उसे अपडेट करें।"
+      "Please update the last topic you taught.",
+      "कृपया आपने जो टॉपिक पढ़ाया है उसे अपडेट करें।"
     );
   }
 }
 
 function showTopicFormPopup(subject, scheduleId) {
+  if (document.querySelector("#topic-form-popup")) return;
   const popUp = document.createElement("div");
+
+  popUp.id = "topic-form-popup";
 
   popUp.innerHTML = `
     <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-60 z-50">
@@ -111,7 +90,7 @@ function showTopicFormPopup(subject, scheduleId) {
       </div>
 
       <div class="text-center">
-        <button type="submit" class="bg-indigo-600 hover:bg-indigo-900 text-white px-6 py-2 rounded shadow">
+        <button onclick="${stopVoiceLoop()}" type="submit" class="bg-indigo-600 hover:bg-indigo-900 text-white px-6 py-2 rounded shadow">
           Submit
         </button>
       </div>
@@ -136,7 +115,7 @@ function showTopicFormPopup(subject, scheduleId) {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ scheduleId, topic }),
+      body: JSON.stringify({ scheduleId, topic, submitted: true }),
     });
 
     stopVoiceLoop();

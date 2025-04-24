@@ -26,7 +26,7 @@ router.post("/lastTopic", async (req, res) => {
     if (scheduleId) {
       await LastTopic.findOneAndUpdate(
         { scheduleId },
-        { topic },
+        { topic, submitted: true },
         { upsert: true, new: true }
       );
     }
