@@ -86,53 +86,46 @@
 
 <section class="px-6 md:px-10 pb-16 ">
     <h2 class="text-2xl font-semibold text-center mb-10 text-indigo-900">Last taught topics list subject wise</h2>
-
-
     <div class="flex justify-center items-center animate-fade-in-up"></div>
 
-    <% if (data.length==0) { %>
-
+    <% if (data.length == 0) { %>
         <div class="text-center mt-10">
             <p class="text-gray-600">No data available<br>Please set schedules first by <a href="/sched"
                     class="underline hover:text-indigo-500">clicking here</a></p>
-
         </div>
+    <% } %>
 
-        <% } %>
-
-            <div class="  shadow-lg rounded-lg p-6 hover:shadow-xl bg-indigo-50 hover:scale-105  transition duration-300">
-                <table class="table-auto w-full border-collapse border border-indigo-900">
-                    <thead>
+    <div class="shadow-lg rounded-lg p-6 hover:shadow-xl bg-indigo-50 hover:scale-105 transition duration-300">
+        <div class="overflow-hidden">
+            <table class="table-auto w-full border-collapse border border-indigo-900 text-sm">
+                <thead>
+                    <tr>
+                        <th class="border border-indigo-900 px-2 py-1 text-left">Sr. no.</th>
+                        <th class="border border-indigo-900 px-2 py-1 text-left">Division</th>
+                        <th class="border border-indigo-900 px-2 py-1 text-left">Subject</th>
+                        <th class="border border-indigo-900 px-2 py-1 text-left">Last Taught Topic</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% data.forEach(item => { %>
                         <tr>
-                            <th class="border border-indigo-900 px-4 py-2 text-left">Sr. no.</th>
-                            <th class="border border-indigo-900 px-4 py-2 text-left">Division</th>
-                            <th class="border border-indigo-900 px-4 py-2 text-left">Subject</th>
-                            <th class="border border-indigo-900 px-4 py-2 text-left">Last Taught Topic</th>
+                            <td class="border border-indigo-900 px-2 py-1 break-words">
+                                <%= data.indexOf(item) + 1 %>
+                            </td>
+                            <td class="border border-indigo-900 px-2 py-1 break-words">
+                                <%= item.division %>
+                            </td>
+                            <td class="border border-indigo-900 px-2 py-1 break-words">
+                                <%= item.subject %>
+                            </td>
+                            <td class="border border-indigo-900 px-2 py-1 break-words">
+                                <%= item.topic %>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <% data.forEach(item=> { %>
-
-
-                            <tr>
-                                <td class="border border-indigo-900  px-4 py-2">
-                                    <%= data.indexOf(item) + 1 %>
-                                </td>
-                                <td class="border border-indigo-900  px-4 py-2">
-                                    <%= item.division %>
-                                </td>
-                                <td class="border border-indigo-900  px-4 py-2">
-                                    <%= item.subject %>
-                                </td>
-                                <td class="border border-indigo-900  px-4 py-2">
-                                    <%= item.topic %>
-                                </td>
-                            </tr>
-                            <% }) %>
-                    </tbody>
-                </table>
-            </div>
-
-            </div>
-</section>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </section>
 </div>
