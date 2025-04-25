@@ -1,33 +1,40 @@
-<div class="bg-indigo-200 p-6 rounded-lg shadow-md w-full max-w-xl h-[80vh] overflow-y-auto justify-self-center mt-6">
-    <h1 class="text-2xl font-bold mb-4 text-center">Doubt solver</h1>
+<div class="flex flex-col lg:flex-row justify-center items-center mt-6">
+    <!-- Chat Section -->
+    <div class="bg-indigo-200 p-6 rounded-lg shadow-md w-full max-w-xl h-[80vh] overflow-y-auto justify-self-center lg:mr-6">
+        <div class="w-28 h-28 rounded-full bg-white shadow-inner p-2 flex justify-center items-center mx-auto hover:scale-105 transition-transform duration-200 border-4 border-transparent hover:border-indigo-500 hover:shadow-[0_0_15px_rgba(75,0,130,0.8)]">
+            <img src="https://static.vecteezy.com/system/resources/previews/021/356/603/original/problem-solving-icon-for-your-website-mobile-presentation-and-logo-design-free-vector.jpg" alt="Summarizer Logo" class="w-full h-full object-contain rounded-full" />
+        </div>
+        <h1 class="text-2xl font-bold mb-4 text-center hover:scale-105 transition-transform duration-200">Doubt Solver</h1>
 
-    <div class="space-y-4">
-        <% chatHistory.forEach((msg)=> { %>
-            <div class="<%= msg.role === 'user' ? 'text-right' : 'text-left' %>">
-                <div class="inline-block px-4 py-2 rounded-lg
-            <%= msg.role === 'user' ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-800' %>">
-                    <%- msg.content %>
+        <div class="space-y-4">
+            <% chatHistory.forEach((msg) => { %>
+                <div class="<%= msg.role === 'user' ? 'text-right' : 'text-left' %>">
+                    <div class="inline-block px-4 py-2 rounded-lg
+                    <%= msg.role === 'user' ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-800' %>">
+                        <%- msg.content %>
+                    </div>
                 </div>
-            </div>
             <% }) %>
+        </div>
+
+        <form action="/doubt" method="POST" class="mt-6 space-y-4">
+            <textarea type="textarea" name="question" placeholder="Ask something..."
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none" required></textarea>
+
+            <button type="submit" class="w-full bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600 hover:scale-105 transition-transform duration-200">
+                Send
+            </button>
+        </form>
+
+        <form action="/doubt/clear" method="POST" class="mt-2">
+            <button type="submit" class="w-full bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 hover:scale-105 transition-transform duration-200">
+                Clear All Doubts
+            </button>
+        </form>
     </div>
 
-
-    <form action="/doubt" method="POST" class="mt-6 space-y-4">
-        <textarea type="textarea" name="question" placeholder="Ask something..."
-            class="w-full px-4 py-2 border rounded-lg focus:outline-none" required></textarea>
-
-
-        <button type="submit" class="w-full bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600">
-            Send
-        </button>
-    </form>
-
-
-    <form action="/doubt/clear" method="POST" class="mt-2">
-        <button type="submit" class="w-full bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
-            Clear All Doubts
-        </button>
-    </form>
-
+    <!-- Image Container (hidden on small screens) -->
+    <div class="hidden lg:block lg:w-1/3 h-[80vh] overflow-hidden bg-gray-300 rounded-lg">
+        <img src="/images/doubt.png" alt="Image" class="w-full h-full object-cover">
+    </div>
 </div>

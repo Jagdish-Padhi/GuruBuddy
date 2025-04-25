@@ -12,7 +12,7 @@ import lastTopicRoutes from "./routes/lastTopicRoutes.js";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import session from 'express-session';
+import session from "express-session";
 
 const app = express();
 const PORT = 3000;
@@ -27,12 +27,13 @@ app.use(expressEjsLayouts);
 app.set("layout", "layout");
 
 // for chating with ai
-app.use(session({
-  secret: 'your-secret-key',  // can be any string
-  resave: false,
-  saveUninitialized: true
-}));
-
+app.use(
+  session({
+    secret: "Session-8850", 
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 // MongoDB connection
 mongoose
@@ -50,7 +51,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
-app.use(methodOverride('_method'));
+app.use(methodOverride("_method"));
 
 //Routes direction
 app.use("/", authRoutes);

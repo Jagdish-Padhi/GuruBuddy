@@ -98,7 +98,7 @@ router.post("/doubt", async (req, res) => {
   req.session.doubt.push({ role: "user", content: question });
 
   try {
-    const result = await groq.doubt.completions.create({
+    const result = await groq.chat.completions.create({
       messages: [
         { role: "system", content: DOUBT_SOLVER_PROMPT },
         ...req.session.doubt,

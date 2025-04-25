@@ -36,7 +36,7 @@
     </div>
 
     <div class="text-center">
-        <button type="submit" class="bg-indigo-700 hover:bg-indigo-900 text-white px-6 py-2 rounded shadow ">
+        <button type="submit" class="bg-indigo-700 hover:bg-indigo-900  hover:scale-105 transition-transform duration-200 text-white px-6 py-2 rounded shadow ">
             Submit
         </button>
     </div>
@@ -84,7 +84,7 @@
 
 <!-- Table for lastly taught topics  -->
 
-<section class="px-6 md:px-10 pb-16">
+<section class="px-6 md:px-10 pb-16 ">
     <h2 class="text-2xl font-semibold text-center mb-10 text-indigo-900">Last taught topics list subject wise</h2>
 
 
@@ -100,14 +100,14 @@
 
         <% } %>
 
-            <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
-                <table class="table-auto w-full border-collapse border border-gray-600">
+            <div class="  shadow-lg rounded-lg p-6 hover:shadow-xl bg-indigo-50 hover:scale-105  transition duration-300">
+                <table class="table-auto w-full border-collapse border border-indigo-900">
                     <thead>
                         <tr>
-                            <th class="border border-gray-300 px-4 py-2 text-left">Sr. no.</th>
-                            <th class="border border-gray-300 px-4 py-2 text-left">Division</th>
-                            <th class="border border-gray-300 px-4 py-2 text-left">Subject</th>
-                            <th class="border border-gray-300 px-4 py-2 text-left">Last Taught Topic</th>
+                            <th class="border border-indigo-900 px-4 py-2 text-left">Sr. no.</th>
+                            <th class="border border-indigo-900 px-4 py-2 text-left">Division</th>
+                            <th class="border border-indigo-900 px-4 py-2 text-left">Subject</th>
+                            <th class="border border-indigo-900 px-4 py-2 text-left">Last Taught Topic</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -115,16 +115,16 @@
 
 
                             <tr>
-                                <td class="border border-gray-300 px-4 py-2">
+                                <td class="border border-indigo-900  px-4 py-2">
                                     <%= data.indexOf(item) + 1 %>
                                 </td>
-                                <td class="border border-gray-300 px-4 py-2">
+                                <td class="border border-indigo-900  px-4 py-2">
                                     <%= item.division %>
                                 </td>
-                                <td class="border border-gray-300 px-4 py-2">
+                                <td class="border border-indigo-900  px-4 py-2">
                                     <%= item.subject %>
                                 </td>
-                                <td class="border border-gray-300 px-4 py-2">
+                                <td class="border border-indigo-900  px-4 py-2">
                                     <%= item.topic %>
                                 </td>
                             </tr>

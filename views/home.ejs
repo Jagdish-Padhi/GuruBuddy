@@ -1,59 +1,83 @@
 <%- include("partials/popUp") %>
 
-  <div class="flex flex-col md:flex-row items-center justify-between px-6 md:px-10 py-10 space-y-10 md:space-y-0">
-
-    <!-- Text Section -->
+  <!-- Hero Section -->
+  <div
+    class="flex flex-col md:flex-row items-center justify-between px-6 md:px-10 py-16 bg-gradient-to-br \ space-y-10 md:space-y-0 rounded-b-3xl shadow-inner">
+    <!-- Text -->
     <div class="md:w-1/2 space-y-6 animate-fade-in-left">
-      <h1 class="text-4xl font-bold text-gray-900 leading-snug">
-        Hello Educators 👩‍🏫<br />Simplify your teaching schedules, amplify your impact!
+      <h1 class="text-5xl font-extrabold text-gray-900 leading-tight tracking-tight">
+        Hello Educators !<br /> 
+       <p  class="text-4xl font-extrabold text-gray-900 leading-tight tracking-tight">Simplify your burdens, Amplify your impact !!</p>
       </h1>
-      <p class="text-gray-600 text-lg">
-        Focus on inspiring minds — let us handle your teaching life seamlessly.
+     
+      <p class="text-gray-700 text-lg leading-relaxed">
+        Focus on inspiring minds — let GuruBuddy handle the rest.
       </p>
-      <div class="flex gap-4">
-        <a href="/sched" class="bg-blue-900 text-white px-5 py-2 rounded hover:bg-blue-700 transition duration-300">
-          Get Started!
+      <div>
+        <a href="/sched"
+          class="inline-block bg-indigo-900 text-white px-6 py-3 rounded-xl text-lg font-medium shadow-md hover:bg-indigo-800 transition duration-300 hover:scale-110">
+          🚀 Get Started
         </a>
       </div>
     </div>
 
-    <!-- Image Section -->
-    <div class="md:w-1/2 animate-fade-in-right">
+    <!-- Image -->
+    <div class="md:w-1/2 animate-fade-in-right hover:scale-105 transition-transform duration-200">
       <img src="/images/teacher.png" alt="Teacher Illustration" class="w-full max-w-md mx-auto scale-90" />
     </div>
   </div>
 
-  <!-- Feature Cards Section -->
-  <section class="px-6 md:px-10 pb-16">
-    <h2 class="text-2xl font-semibold text-center mb-10 text-gray-600">Powerful Features for You</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in-up">
+  <!-- Features Section -->
+  <section class="px-6 md:px-10 py-16">
+    <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Powerful Features Designed for You</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in-up ">
       <!-- Card 1 -->
-      <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
-        <h3 class="text-xl font-bold text-blue-900 mb-2">Set Schedule</h3>
-        <p class="text-gray-600">Set your weekly schedule once and leave rest remainder works on GuruBuddy!</p>
+      <div class="bg-white border border-indigo-100 rounded-2xl p-6 shadow-md hover:shadow-xl transition hover:scale-105 transform duration-200">
+        <h3 class="text-xl font-bold text-indigo-900 mb-3">📅 Easy Schedule Setup</h3>
+        <p class="text-gray-600">Set your weekly <b>schedule once</b>, and let GuruBuddy handle all the reminders and
+          tracking.</p>
       </div>
-      <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
-        <h3 class="text-xl font-bold text-blue-900 mb-2">Unique Summerizer</h3>
-        <p class="text-gray-600">As your lecture starts GuruBuddy will capture your each word and at the end of lecture summary of all your explanations will be provided by GuruBuddy!</p>
-      </div>
+
       <!-- Card 2 -->
-      <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
-        <h3 class="text-xl font-bold text-blue-900 mb-2">AI powered GuruBuddy Support</h3>
-        <p class="text-gray-600">Facing problem to resolve any doubt or busy? then just type your doubt and get detailed
-          explanations.</p>
+
+      <div class="bg-white border border-indigo-100 rounded-2xl p-6 shadow-md hover:shadow-xl hover:scale-105 transition-transform duration-200">
+        <h3 class="text-xl font-bold text-indigo-900 mb-3">🤖 AI-Powered Doubt Solver</h3>
+        <p class="text-gray-600">Stuck in any confusion? It's normal, Let GuruBuddy handle your subject related
+          confusion/high level doubts instantly which is a powerful doubt solver designed <b>specific for teachers</b>.
+        </p>
       </div>
+
+
+
       <!-- Card 3 -->
-      <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
-        <h3 class="text-xl font-bold text-blue-900 mb-2">Smart Reminder System</h3>
-        <p class="text-gray-600">GuruBuddy will remind you where you left the topic last time and from where to continue
-          in lecture which will free you from jumbling all classes ongoing topics.</p>
+
+      <div class="bg-white border border-indigo-100 rounded-2xl p-6 shadow-md hover:shadow-xl hover:scale-105 transition-transform duration-200">
+        <h3 class="text-xl font-bold text-indigo-900 mb-3">🔔 Smart Topic Reminders</h3>
+        <p class="text-gray-600">GuruBuddy remembers <b>where you left off last topic</b> for a specific subject <b>even
+            for a specific division/class</b> and reminds you through voice notification and popUp before your next
+          lecture.</p>
       </div>
 
       <!-- Card 4 -->
-      <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
-        <h3 class="text-xl font-bold text-blue-900 mb-2">AI powered GuruBuddy Support</h3>
-        <p class="text-gray-600">Facing problem to resolve any doubt or busy? then just type your doubt and get detailed
+
+      <div class="bg-white border border-indigo-100 rounded-2xl p-6 shadow-md hover:shadow-xl hover:scale-105 transition-transform duration-200">
+        <h3 class="text-xl font-bold text-indigo-900 mb-3">🔊 Bilingual voice reminder</h3>
+        <p class="text-gray-600">GuruBuddy captures your lecture in real-time and generates a summary of your
           explanations.</p>
+      </div>
+
+      <!-- Card 5  -->
+      <div class="bg-white border border-indigo-100 rounded-2xl p-6 shadow-md hover:shadow-xl hover:scale-105 transition-transform duration-200">
+        <h3 class="text-xl font-bold text-indigo-900 mb-3">💡 AI Powered Smart Helper</h3>
+        <p class="text-gray-600">You can ask any query related to your life and get instant intelligent response.</p>
+      </div>
+      <!-- Card 6  -->
+      <div class="bg-white border border-indigo-100 rounded-2xl p-6 shadow-md hover:shadow-xl hover:scale-105 transition-transform duration-200">
+        <h3 class="text-xl font-bold text-indigo-900 mb-3">🌟Project idea expansion ?</h3>
+        <p class="text-gray-600">How this basic product can be expanded with more advanced features? Please visit our <a
+            href="/future" class="text-indigo-900 font-semibold  hover:text-indigo-600 hover:underline">Upcoming
+            Features</a> section.</p>
       </div>
     </div>
   </section>
