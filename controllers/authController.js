@@ -1,4 +1,4 @@
-import Teacher from "../models/Teacher.js";
+import Teacher from "../models/teacher.js";
  
 const sendToken = (res, teacher) => {
   const token = teacher.generateJWT();
