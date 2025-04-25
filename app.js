@@ -15,7 +15,7 @@ import cors from "cors";
 import session from "express-session";
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 dotenv.config();
 
 //Ejs rendering settings
