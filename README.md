@@ -126,9 +126,82 @@ Highlight the most important features of your project:
 # Clone the repo
 git clone https://github.com/Jagdish-Padhi/Gurubuddy
 
-# Install dependencies
-cd gurubuddy
+# Navigate into project directory
+cd Gurubuddy
+
+# Install backend and frontend dependencies
 npm install
+
+# Create a .env file at the root with the following environment variables:
+# (Example)
+# MONGODB_URI=your_mongodb_connection_string
+# PORT=5000
+# GROQ_API_KEY=your_groq_api_key
 
 # Start development server
 npm run dev
+
+# Open your browser and visit
+http://localhost:5000
+```
+### Backend/Frontend Split and Environment Setup Notes:
+
+- **Project Structure**:  
+  GuruBuddy is a full-stack web application using **EJS** templates for frontend and **Node.js + Express.js** for backend.  
+  (Both frontend and backend are integrated together — no separate folders.)
+
+- ### 📂 Project Folder Structure
+
+```bash
+gurubuddy/
+│
+│
+├── controllers/
+│   └── authController.js   # Authentication logic
+│   └── schedController.js  # Schedule management and reminder logic
+│
+├── models/
+│   └── teacher.js          # Teacher schema
+│   └── schedule.js         # Schedule schema
+│   └── lastTopic.js        # Last taught topic schema
+│
+├── public/
+│   ├── css/
+│   │   └── input.css       
+│   │   └── tailwind.css    # tailwind CSS
+│   ├── js/
+│   │   └── reminder.js     # frontend reminder logics
+│
+├── routes/
+│   └── authRoutes.js       # Authentication routes
+│   └── schedRoutes.js      # Schedule-related routes
+│   └── lastTopicRoutes.js  # Reminder system routes
+│   └── aiRoutes.js         # Groq AI related routes
+│   └── static.js           # static pages routes
+│
+├── views/
+│   ├── partials/           # Header, Footer EJS Partials
+        ├── header.ejs
+        ├── footer.ejs
+        ├── popUp.ejs
+        ├── navbar.ejs 
+│   ├── home.ejs            # Main Homepage login
+│   ├── sched.ejs           # Schedule setup page
+│   └── doubt.ejs           # doubt solver
+│   └── guruBuddy.ejs       # Smart Helper
+│   └── future.ejs          # Upcoming features vision
+│   └── ans.ejs         
+│   └── summary.ejs
+│   └── layout.ejs
+│   └── login.ejs
+│   └── signUp.ejs
+│
+├── .env                     
+├── .gitignore               
+├── package.json            
+├── app.js                  # Main Express server entry point
+└── README.md               # Project documentation
+
+```
+
+
