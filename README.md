@@ -94,6 +94,7 @@ Highlight the most important features of your project:
 - ✅ **Dynamic Data Table**: Teachers can access a dynamically updating table showing the last taught topic for each subject and division.
 - ✅ **AI-Powered Doubt Solver**: A Groq-powered chatbot assists teachers by providing real-time examples and explanations for complex topics.
 - ✅ **Customizable Schedule**: Teachers can customize their institution’s schedule anytime with ease.
+- - ✅ **Future Vision**: Shown how we can add more value in upcoming features section.
 
 ---
 
@@ -203,5 +204,42 @@ gurubuddy/
 └── README.md               # Project documentation
 
 ```
+
+---
+
+## 🧬 Future Scope
+
+List improvements, extensions, or follow-up features:
+
+- 🔊 Automated audio summarization after lecture  
+- ✅ AI powered Smart answersheet feedback generator with student integration  
+- 🌐 Dynamic Dashboard with analytics
+- 🙏🏻 Must visit upcoming feature section in app for detailed future plans
+
+---
+
+## 📎 Resources / Credits
+
+- Groq AI API (planned integration)
+
+- MongoDB Atlas
+
+- Tailwind CSS
+
+- Node.js Official Documentation
+
+- Express.js Official Documentation
+
+- Special thanks to mentors, seniors, and THE NAMESCAPE COMMUNITY 🥰.
+
+---
+
+## 🏁 Final Words
+
+GuruBuddy was built to genuinely solve a daily problem faced by teachers.
+Throughout the hackathon, the journey involved deep brainstorming, solving real deployment challenges, and learning advanced tech integrations.
+Excited for the potential future expansion of GuruBuddy into an even smarter real-world teaching companion 🚀!
+
+---
 
 
