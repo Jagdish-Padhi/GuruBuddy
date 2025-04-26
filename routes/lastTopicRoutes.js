@@ -6,14 +6,15 @@ import {
   checkAfterLec,
   renderLastTopic,
 } from "../controllers/schedController.js";
+import isAuthenticated from "../middleware/auth.js";
 
 const router = express.Router();
 
 //Rendering the last topic form page
-router.get("/lastTopic", renderLastTopic);
+router.get("/lastTopic", isAuthenticated, renderLastTopic);
 
 //submission of form
-router.post("/lastTopic", async (req, res) => {
+router.post("/lastTopic", isAuthenticated, async (req, res) => {
   try {
     const { scheduleId, topic } = req.body;
 
@@ -40,9 +41,9 @@ router.post("/lastTopic", async (req, res) => {
 });
 
 //sending remainder checkUp data to frontend to show or not popUp of remainder
-router.get("/getReminder", getReminder);
+router.get("/getReminder", isAuthenticated, getReminder);
 
 //after lecture popUp to fill the form
-router.get("/checkAfterLec", checkAfterLec);
+router.get("/checkAfterLec", isAuthenticated, checkAfterLec);
 
 export default router;

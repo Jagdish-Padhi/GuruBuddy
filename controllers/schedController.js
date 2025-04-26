@@ -26,6 +26,10 @@ export const renderSched = async (req, res, scsMsg = null, errMsg = null) => {
       });
     }
 
+    console.log("Fetching schedules for userId:", req.userId);
+
+    console.log("Fetched schedules:", schedules);
+
     res.render("sched", {
       days,
       scheduleMap,
@@ -98,7 +102,6 @@ export const renderLastTopic = async (
 };
 
 //For lecture remainder data sending to frontend
-
 export const getReminder = async (req, res) => {
   console.log("🔍 API Hit: sched/getReminder");
   const nowIST = new Date().toLocaleString("en-US", {

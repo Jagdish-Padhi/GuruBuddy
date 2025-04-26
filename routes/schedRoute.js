@@ -5,7 +5,7 @@ import isAuthenticated from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.get("/sched", (req, res) => {
+router.get("/sched", isAuthenticated, (req, res) => {
   const { scsMsg = null, errMsg = null } = req.query;
   renderSched(req, res, scsMsg, errMsg);
 });
