@@ -4,7 +4,7 @@ import LastTopic from "../models/lastTopic.js";
 //Render Schedules page
 export const renderSched = async (req, res, scsMsg = null, errMsg = null) => {
   try {
-    const schedules = await Schedule.find().lean();
+    const schedules = await Schedule.find({ teacherId: req.userId }).lean();
     const days = [
       "Monday",
       "Tuesday",
@@ -47,7 +47,7 @@ export const renderLastTopic = async (
   errMsg = null
 ) => {
   try {
-    const schedules = await Schedule.find({});
+    const schedules = await Schedule.find({ teacherId: req.userId });
 
     const data = await Promise.all(
       schedules.map(async (schedule) => {
@@ -112,6 +112,7 @@ export const getReminder = async (req, res) => {
 
   const schedule = await Schedule.findOne({
     day: currentDay,
+    teacherId: req.userId,
     from: currentTime,
   });
 
@@ -156,7 +157,10 @@ export const checkAfterLec = async (req, res) => {
 
   const currentDay = now.toLocaleString("en-US", { weekday: "long" });
 
-  const schedules = await Schedule.find({ day: currentDay });
+  const schedules = await Schedule.find({
+    teacherId: req.userId,
+    day: currentDay,
+  });
 
   for (let s of schedules) {
     const [hour, min] = s.to.split(":").map(Number);

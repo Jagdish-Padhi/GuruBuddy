@@ -1,6 +1,7 @@
 import express from "express";
 import Schedule from "../models/schedule.js";
 import { renderSched } from "../controllers/schedController.js";
+import isAuthenticated from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ router.get("/sched", (req, res) => {
   renderSched(req, res, scsMsg, errMsg);
 });
 
-router.post("/sched", async (req, res) => {
+router.post("/sched", isAuthenticated, async (req, res) => {
   const { day, subject, division, from, to } = req.body;
 
   if (!day || !subject || !division || !from || !to) {
@@ -18,7 +19,14 @@ router.post("/sched", async (req, res) => {
   }
 
   try {
-    const schedule = new Schedule({ day, subject, division, from, to });
+    const schedule = new Schedule({
+      teacherId: req.userId,
+      day,
+      subject,
+      division,
+      from,
+      to,
+    });
     await schedule.save();
 
     const msg = encodeURIComponent("Schedule saved successfully!");
@@ -52,11 +60,9 @@ router.delete("/sched/:id", async (req, res) => {
 
 router.delete("/sched", async (req, res) => {
   try {
-
     const schedule = await Schedule.findOne({});
 
-    if(!schedule){
-
+    if (!schedule) {
       const msg = encodeURIComponent("Already schedule is empty!");
       res.redirect("/sched?errMsg=" + msg);
     }
@@ -72,6 +78,5 @@ router.delete("/sched", async (req, res) => {
     res.redirect("/sched?errMsg=" + msg);
   }
 });
-
 
 export default router;
