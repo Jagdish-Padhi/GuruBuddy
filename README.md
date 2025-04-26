@@ -81,11 +81,7 @@ to solve real-world problems with a focus on user experience and innovation.
 
 ### Sponsor Technologies Used (if any):
 - ✅ **Groq**: Attempted integration of Groq AI for the **Doubt Solver** and **Smart Helper** features. Due to limitations in the free-tier, full implementation was not possible.
-- ❌ **Monad**: Not used.
-- ❌ **Fluvio**: Not used.
-- ❌ **Base**: Not used.
-- ❌ **Screenpipe**: Not used.
-- ❌ **Stellar**: Not used.
+
 
 ---
 
@@ -103,18 +99,18 @@ Highlight the most important features of your project:
 
 ## 📽️ Demo & Deliverables
 
-- **Demo Video Link**: [Paste YouTube or Loom link here]  
-- **Pitch Deck / PPT Link**: [Paste Google Slides / PDF link here]  
+- **Demo Video Link**: https://www.youtube.com/watch?v=zGBj4YpnrgE&ab_channel=AroundTheWorld
+- **Deployment link**: https://gurubuddy.onrender.com/ 
 
 ---
 
 ## ✅ Tasks & Bonus Checklist
 
-- [ ] **All members of the team completed the mandatory task** - Followed at least 2 of our social channels and filled the form (Details in Participant Manual)  
-- [ ] **All members of the team completed Bonus Task 1** - Sharing of Badges and filled the form (2 points)  
-- [ ] **All members of the team completed Bonus Task 2** - Signing up for Sprint.dev and filled the form (3 points)  
+- ✅ **All members of the team completed the mandatory task** - Followed at least 2 of our social channels and filled the form (Details in Participant Manual)  
+- ✅ **All members of the team completed Bonus Task 1** - Sharing of Badges and filled the form (2 points)  
+- ✅ **All members of the team completed Bonus Task 2** - Signing up for Sprint.dev and filled the form (3 points)  
 
-*(Mark with ✅ if completed)*
+*(Marked with ✅ which completed)*
 
 ---
 
@@ -128,7 +124,7 @@ Highlight the most important features of your project:
 ### Local Setup:
 ```bash
 # Clone the repo
-git clone https://github.com/your-team/gurubuddy
+git clone https://github.com/Jagdish-Padhi/Gurubuddy
 
 # Install dependencies
 cd gurubuddy
